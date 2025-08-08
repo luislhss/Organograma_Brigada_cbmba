@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organograma Brigada de Incêndio - IT 17</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
+</head>
+<body>
+  <div id="zoom-panel">
+    <div id="drag-handle">⋮ Mover Painel</div>
+    <button onclick="desselecionarTudo()">🔲 Desselecionar Tudo</button>
+    <button onclick="deletarNoSelecionado()">🗑️ Excluir Nó(s)</button>
+    <button onclick="deletarLigacaoSelecionada()">🗑️ Excluir Ligação</button>
+    <button onclick="modoAdicionarFilho()">➕ Adicionar Filho (2 cliques)</button>
+    <label>Forma Nó:</label>
+    <select id="nodeShape">
+      <option value="rect" selected>Retangular</option>
+      <option value="round">Arredondado</option>
+      <option value="oval">Oval</option>
+      <option value="circle">Círculo</option>
+    </select>
+    <label>Conector:</label>
+    <select id="connectorType">
+      <option value="Flowchart" selected>Ortogonal</option>
+      <option value="Bezier">Curvo</option>
+    </select>
+    <label>Ponto:</label>
+    <select id="endpointType">
+      <option value="Dot">Ponto</option>
+      <option value="Rectangle">Retângulo</option>
+      <option value="Arrow">Seta Preenchida</option>
+      <option value="Blank">Vazio</option>
+    </select>
+    <label>Tamanho:</label>
+    <input type="range" id="endpointSize" min="3" max="20" value="5">
+    <button onclick="aplicarAlteracoesGlobais()">⚙️ Aplicar Alterações</button>
+    <button onclick="zoomIn()">🔍➕</button>
+    <button onclick="zoomOut()">🔍➖</button>
+    <button onclick="resetZoom()">🔄</button>
+    <button onclick="centralizarProjeto()">🎯 Centralizar</button>
+    <button onclick="limparOrganograma()">🧹 Limpar</button>
+    <button onclick="organizarOrganograma()">📐 Organizar</button>
+  </div>
+
+  <div id="main-container">
+    <div id="org-container">
+      <div id="tree" class="org-chart"></div>
+    </div>
+    <div id="divider"></div>
+    <div id="editor-panel" class="floating-panel">
+      <div class="card">
+        <h2>Configurar Estrutura da Brigada</h2>
+        <label>Responsável:</label>
+        <input type="text" id="responsavel" placeholder="Nome do responsável principal"><br>
+        <div id="hierarquia-container"></div>
+        <button class="btn-add" onclick="adicionarHierarquia()">+ Adicionar Hierarquia</button><br>
+        <label><input type="radio" name="modoHierarquia" value="completa" checked> Usar hierarquia personalizada</label><br>
+        <label><input type="radio" name="modoHierarquia" value="pavimentos"> Iniciar pelos pavimentos</label>
+      </div>
+
+      <div class="card">
+        <h3>Pavimentos e Turnos</h3>
+        <label>Número de Pavimentos:</label>
+        <input type="number" id="numPavimentos" min="1" value="3"><br>
+        <label>Turnos (separar por vírgula):</label>
+        <input type="text" id="turnos" value="Matutino,Vespertino,Noturno"><br>
+        <button class="btn-action" onclick="gerarPavimentos()">Gerar Pavimentos</button>
+        <div id="pavimentos"></div>
+        <button class="btn-action" onclick="gerarOrganograma()">Gerar Organograma</button>
+      </div>
+
+      <div class="card">
+        <h3>Editar Nó Selecionado</h3>
+        <label>Nome:</label>
+        <input type="text" id="nodeTitle"><br>
+        <label>Cor:</label>
+        <input type="color" id="nodeColor" value="#e3f2fd"><br>
+        <label>X:</label><input type="number" id="coordX"><br>
+        <label>Y:</label><input type="number" id="coordY"><br>
+        <button class="btn-action" onclick="aplicarAlteracoes()">Aplicar Alterações</button>
+      </div>
+
+      <div class="card">
+        <h3>Editar Ligação Selecionada</h3>
+        <label>Tipo Conector:</label>
+        <select id="editConnectorType">
+          <option value="Flowchart">Ortogonal</option>
+          <option value="Bezier">Curvo</option>
+        </select>
+        <label>Tipo Ponto:</label>
+        <select id="editEndpointType">
+          <option value="Dot">Ponto</option>
+          <option value="Rectangle">Retângulo</option>
+          <option value="Arrow">Seta Preenchida</option>
+          <option value="Blank">Vazio</option>
+        </select>
+        <label>Tamanho:</label>
+        <input type="range" id="editEndpointSize" min="3" max="20" value="5">
+        <button class="btn-action" onclick="aplicarAlteracoesLigacao()">Aplicar Alterações na Ligação</button>
+        <button class="btn-action" onclick="deletarLigacaoSelecionada()">Excluir Ligação</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

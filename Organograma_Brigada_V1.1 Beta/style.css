@@ -1,0 +1,173 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Painel de ferramentas */
+#zoom-panel {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  width: 260px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  user-select: none;
+}
+
+#drag-handle {
+  background: #ddd;
+  padding: 6px;
+  text-align: center;
+  font-size: 14px;
+  cursor: move;
+  border-bottom: 1px solid #bbb;
+  border-radius: 4px 4px 0 0;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+#zoom-panel button, select, input {
+  margin: 3px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* Layout principal */
+#main-container {
+  display: flex;
+  height: 100vh;
+}
+
+#org-container {
+  flex: 1;
+  overflow: hidden;
+  background: #f1f1f1;
+  position: relative;
+  cursor: grab;
+}
+
+#tree {
+  position: absolute;
+  transform-origin: 0 0;
+}
+
+.floating-panel {
+  position: relative;
+  width: 350px;
+  background: #fff;
+  border-left: 1px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.card {
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.card h2, .card h3 {
+  margin-top: 0;
+  background: #e0e0e0;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.btn-action {
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 3px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.btn-add {
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  margin: 3px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.btn-action:hover, .btn-add:hover {
+  opacity: 0.8;
+}
+
+/* ===== Estilo dos nós ===== */
+.node {
+  position: absolute;
+  padding: 10px;
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  cursor: move;
+  user-select: none;
+  resize: both;
+  overflow: auto;
+  min-width: 120px;
+  min-height: 40px;
+  text-align: center;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.node.selecionado {
+  border: 3px solid #1976d2;
+  background: #bbdefb;
+}
+
+/* Formas alternativas */
+.node.rect {
+  border-radius: 4px;
+}
+
+.node.round {
+  border-radius: 12px;
+}
+
+.node.oval {
+  border-radius: 50px / 20px;
+  width: 150px;
+  height: 60px;
+}
+
+.node.circle {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  line-height: 60px;
+}
+
+/* Botão para remover nó */
+.remove-btn {
+  color: red;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* Cursor de seleção para linhas */
+.jtk-connector path {
+  cursor: pointer;
+}
+
+/* Destaque de ligações selecionadas */
+.jtk-connector.selected path {
+  stroke: #ff5722 !important;
+  stroke-width: 3px !important;
+}
+
+/* Botões extras */
+#zoom-panel button:hover {
+  background: #e1e1e1;
+}
